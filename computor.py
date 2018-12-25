@@ -15,13 +15,15 @@ if __name__ == '__main__':
 	if equals_count != 1:
 		sys.exit('Wrong format: found {} equals sign'.format(equals_count))
 	equation = Equation(input)
-	if equation.check_degree() == False\
-	or equation.check_terms() == False:
+	if not equation.check_degree() or not equation.check_terms():
 		sys.exit('Wrong format: check that you formatted the equation correctly')
 	print(equation.get_reduced_form())
 	print('Polynomial degree: ' + str(equation.get_degree()))
 	if equation.degree > 2:
 		sys.exit('The polynomial degree is stricly greater than 2, I can\'t solve.')
+	elif equation.degree == 0:
+		sys.exit('Equation is invalid')
+	print('Delta: ' + str(equation.get_delta()))
 
 # Bonus :
 # - floats
