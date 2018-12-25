@@ -26,7 +26,6 @@ class Equation:
 				else:
 					self.terms[i] += float(match.group('val'))
 				terms_len += len(match.group(0))
-		# Check if part is correctly formatted and not empty
 		return terms_len == len(equation_part) and len(equation_part) != 0
 
 	def get_reduced_form(self):
@@ -45,9 +44,19 @@ class Equation:
 				self.degree = term
 		return self.degree
 
-	# b^2 - 4ac
-	def get_delta(self):
-		return ((self.terms[1] ** 2) - (4 * self.terms[2] * self.terms[0]))
-
-	# def solve_equation(self):
-	# 	if self.degree == 1:
+	def solve(self):
+		if self.degree == 1:
+			solution = 'The solution is:\n' + str(-self.terms[0] / self.terms[1])
+		else:
+			self.delta = self.terms[1]**2 - (4 * self.terms[2] * self.terms[0])
+			solution = 'Discriminant: ' + str(self.delta)
+			if self.delta < 0:
+				solution += '\nThe discriminant is stricly negative, there is no solution'
+			elif self.delta == 0:
+				solution += '\nThe discriminant is null, there is one solution:\n'\
+				+ str(-self.terms[1] / (2 * self.terms[2]))
+			else:
+				solution += '\nThe discriminant is stricly positive, there are two solutions:\n'\
+				+ str((-self.terms[1] - self.delta**0.5) / (2 * self.terms[2])) + '\n'\
+				+ str((-self.terms[1] + self.delta**0.5) / (2 * self.terms[2]))
+		return solution
