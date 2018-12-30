@@ -17,25 +17,29 @@ def error_handler(err_code, equals_count=0):
 			'The polynomial degree is stricly greater than 2, I can\'t solve.',
 			'Equation is invalid'
 		]
-	sys.exit(err[err_code])
+	return err[err_code]
+
+def computor(input):
+	solution = ''
+	equals_count = input.count('=')
+	if equals_count != 1:
+		return solution + error_handler(0, equals_count)
+	equation = Equation(input)
+	if not equation.check_degree() or not equation.check_terms():
+		return solution + error_handler(1)
+	if equation.get_reduced_form() == 'Reduced form: = 0':
+		return solution + error_handler(2)
+	solution += equation.get_reduced_form()
+	solution += ('Polynomial degree: ' + str(equation.get_degree()) + '\n')
+	if equation.degree > 2:
+		return solution + error_handler(3)
+	elif equation.degree == 0:
+		return solution + error_handler(4)
+	return solution + equation.solve()
 
 if __name__ == '__main__':
 	input = get_input()
-	equals_count = input.count('=')
-	if equals_count != 1:
-		error_handler(0, equals_count)
-	equation = Equation(input)
-	if not equation.check_degree() or not equation.check_terms():
-		error_handler(1)
-	if equation.get_reduced_form() == 'Reduced form: = 0':
-		error_handler(2)
-	print(equation.get_reduced_form())
-	print('Polynomial degree: ' + str(equation.get_degree()))
-	if equation.degree > 2:
-		error_handler(3)
-	elif equation.degree == 0:
-		error_handler(4)
-	print(equation.solve())
+	print(computor(input))
 
 # Bonus :
 # - floats

@@ -36,7 +36,7 @@ class Equation:
 		reduced_form = re.sub(r'^\+ ', '', reduced_form)
 		return 'Reduced form: '\
 				+ re.sub(r'\.0 ', ' ', reduced_form)\
-				+ '= 0'
+				+ '= 0\n'
 
 	def get_degree(self):
 		for term, value in self.terms.items():
