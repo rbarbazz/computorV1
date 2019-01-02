@@ -1,4 +1,4 @@
-"""computorV1 URL Configuration
+"""webapp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from computor import views
+from solver import views
 
 urlpatterns = [
 	re_path(r'^$', views.index, name='index'),
-	path('computor/', include('computor.urls')),
+	path('solver/', include('solver.urls')),
     path('admin/', admin.site.urls),
 ]
