@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Computor V1 - Index</title>
+		<title>Computor V1 - Solver</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	</head>
 	<body>
@@ -11,6 +11,7 @@
 	        <div class="col-lg-12 text-center">
 	          <h1 class="mt-5">Computor V1</h1>
 	          <p class="lead">Solve a polynomial equation up to degree 2</p>
+			  <p class="lead">Format: n * X^[0-2]</p>
 			  <form action="/solver/" method="post">
 				  <div class="form-group">
 					  {% csrf_token %}
