@@ -7,7 +7,7 @@ from .Equation import Equation
 def get_input():
 	parser = argparse.ArgumentParser(description='Solve a polynomial equation up to degree 2')
 	parser.add_argument('equation', help='Format: \"n * X^[0-2]\"')
-	return re.sub(r'\s+', '', parser.parse_args().equation)
+	return parser.parse_args().equation
 
 def error_handler(err_code, equals_count=0):
 	err = [
@@ -21,6 +21,7 @@ def error_handler(err_code, equals_count=0):
 
 def solve_equ(input):
 	solution = ''
+	input = re.sub(r'\s+', '', input)
 	equals_count = input.count('=')
 	if equals_count != 1:
 		return solution + error_handler(0, equals_count)

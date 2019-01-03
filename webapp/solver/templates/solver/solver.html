@@ -11,12 +11,12 @@
 	        <div class="col-lg-12 text-center">
 	          <h1 class="mt-5">Computor V1</h1>
 	          <p class="lead">Solve a polynomial equation up to degree 2</p>
-			  <form>
+			  <form action="/solver/" method="post">
 				  <div class="form-group">
-				    <label for="equationInput">Equation</label>
-				    <input type="email" class="form-control" id="equationInput" aria-describedby="emailHelp" placeholder="Input your equation">
+					  {% csrf_token %}
+				      {{ form }}
 				  </div>
-				  <button type="submit" class="btn btn-danger">Solve</button>
+				  <input type="submit" class="btn btn-danger" value="Solve"/>
 			  </form>
 		  	</div>
 	      </div>
