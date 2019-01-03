@@ -13,6 +13,7 @@ class Equation:
 
 	# Check if both sides are valid
 	def check_terms(self):
+		print('dab')
 		return self.get_term(self.left, False) and self.get_term(self.right, True)
 
 	def get_term(self, equation_part, isRight):

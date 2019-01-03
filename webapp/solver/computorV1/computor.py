@@ -1,7 +1,7 @@
 import sys
 import argparse
 import re
-from Equation import Equation
+from .Equation import Equation
 
 # When the program is called from CLI
 def get_input():
@@ -19,7 +19,7 @@ def error_handler(err_code, equals_count=0):
 		]
 	return err[err_code]
 
-def computor(input):
+def solve_equ(input):
 	solution = ''
 	equals_count = input.count('=')
 	if equals_count != 1:
@@ -39,7 +39,7 @@ def computor(input):
 
 if __name__ == '__main__':
 	input = get_input()
-	print(computor(input))
+	print(solve_equ(input))
 
 # Bonus :
 # - floats
