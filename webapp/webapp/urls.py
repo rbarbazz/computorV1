@@ -18,7 +18,6 @@ from django.urls import include, path, re_path
 from solver import views
 
 urlpatterns = [
-	re_path(r'^$', views.index, name='index'),
-	path('solver/', include('solver.urls')),
+    re_path(r'^', include('solver.urls')),
     path('admin/', admin.site.urls),
 ]

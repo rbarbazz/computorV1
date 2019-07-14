@@ -1,8 +1,7 @@
 import argparse
 import re
 import sys
-
-from Equation import Equation
+from equation import Equation
 
 
 # When the program is called from CLI
@@ -28,13 +27,16 @@ def solve_equ(input):
     solution = ''
     input = re.sub(r'\s+', '', input)
     equals_count = input.count('=')
+
     if equals_count != 1:
         return solution + error_handler(0, equals_count)
+
     equation = Equation(input)
     if not equation.check_terms():
         return solution + error_handler(1)
     if equation.get_reduced_form() == 'Reduced form: = 0\n':
         return solution + error_handler(2)
+
     solution += equation.get_reduced_form()
     solution += ('Polynomial degree: ' + str(equation.get_degree()) + '\n')
     if equation.degree > 2:
@@ -51,3 +53,4 @@ if __name__ == '__main__':
 # Bonus :
 # - floats
 # - formatting error handling : wrong degree, wrong format
+# - webapp
