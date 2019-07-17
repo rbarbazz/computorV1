@@ -35,6 +35,7 @@ def solve_equ(input):
 
     solution += 'Reduced form: {}= 0\n'.format(equation.reduced_form)
     solution += 'Polynomial degree: {}\n'.format(equation.get_degree())
+    # Check degree
     if equation.degree > 2:
         return (
             solution +
@@ -56,8 +57,3 @@ if __name__ == '__main__':
 # - natural form inputs: a * X^n, a * X, X^n, a
 # - formatting error handling : wrong degree, wrong format
 # - webapp
-
-
-# Todo:
-# - recode sqrt
-# - complex solutions

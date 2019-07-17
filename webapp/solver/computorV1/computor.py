@@ -26,6 +26,7 @@ def solve_equ(input):
 
     solution += 'Reduced form: {}= 0\n'.format(equation.reduced_form)
     solution += 'Polynomial degree: {}\n'.format(equation.get_degree())
+    # Check degree
     if equation.degree > 2:
         return (
             solution +

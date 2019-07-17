@@ -1,5 +1,11 @@
 import re
-import math
+
+
+def sqrt(number, number_iters=500):
+    a = float(number)
+    for i in range(number_iters):
+        number = 0.5 * (number + a / number)
+    return number
 
 
 class Equation:
@@ -82,31 +88,36 @@ class Equation:
             return 'The solution is:\n{} '.format(-c / b)
         else:
             self.delta = b ** 2 - (4 * a * c)
-            solution = 'Discriminant: {} \n'.format(self.delta)
+            solution_str = 'Discriminant: {} \n'.format(self.delta)
 
             if self.delta < 0:
-                solution += (
+                first_part = -b / (2 * a)
+                second_part = sqrt(-self.delta) / (2 * a)
+                solution_str += (
                     'The discriminant is stricly negative, ' +
-                    'there are two complex solution:\n'
+                    'there are two complex solution:\n' +
+                    '{} + i * {}\n' +
+                    '{} - i * {}'
+                ).format(
+                    first_part,
+                    second_part,
+                    first_part,
+                    second_part
                 )
-                # first_part = str(-b / (2 * a))
-                # sec_part = str(((-math.sqrt(self.delta))) / (2 * a))
-                # solution += first_part + ' + i * ' + sec_part + '\n'
-                # solution += first_part + ' - i * ' + sec_part
             elif self.delta == 0:
-                solution += (
+                solution_str += (
                     'The discriminant is null, ' +
                     'there is one solution:\n'
                 )
-                solution += '{} '.format(-b / (2 * a))
+                solution_str += '{} '.format(-b / (2 * a))
             else:
-                solution += (
+                solution_str += (
                     'The discriminant is stricly positive, ' +
                     'there are two solutions:\n'
                 )
-                solution += '{} \n{} '.format(
-                    (-b - math.sqrt(self.delta)) / (2 * a),
-                    (-b + math.sqrt(self.delta)) / (2 * a)
+                solution_str += '{} \n{} '.format(
+                    (-b - sqrt(self.delta)) / (2 * a),
+                    (-b + sqrt(self.delta)) / (2 * a)
                 )
 
-        return solution
+        return solution_str
