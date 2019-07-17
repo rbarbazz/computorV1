@@ -96,8 +96,8 @@ class Equation:
                 solution_str += (
                     'The discriminant is stricly negative, ' +
                     'there are two complex solution:\n' +
-                    '{} + i * {}\n' +
-                    '{} - i * {}'
+                    '{} + i * {} \n' +
+                    '{} - i * {} '
                 ).format(
                     first_part,
                     second_part,

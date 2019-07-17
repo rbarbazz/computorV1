@@ -14,8 +14,13 @@ def get_input():
 
 
 def solve_equ(input):
-    solution = ''
+    input = re.sub(r'\s+', ' ', input)
+    solution = 'Equation: {}\n'.format(input)
     input = re.sub(r'\s+', '', input)
+    input = input.replace('+-', '-')
+    input = input.replace('-+', '-')
+    input = input.replace('--', '+')
+    input = input.replace('++', '+')
 
     # Check the count of equal sign
     equals_count = input.count('=')
@@ -55,5 +60,6 @@ if __name__ == '__main__':
 
 # Bonus :
 # - natural form inputs: a * X^n, a * X, X^n, a
-# - formatting error handling : wrong degree, wrong format
+# - formatting error handling : wrong degree, wrong format, double sign
+# - solid parser
 # - webapp

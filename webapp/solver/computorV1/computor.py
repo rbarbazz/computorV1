@@ -5,8 +5,13 @@ from .equation import Equation
 
 
 def solve_equ(input):
-    solution = ''
+    input = re.sub(r'\s+', ' ', input)
+    solution = 'Equation: {}\n'.format(input)
     input = re.sub(r'\s+', '', input)
+    input = input.replace('+-', '-')
+    input = input.replace('-+', '-')
+    input = input.replace('--', '+')
+    input = input.replace('++', '+')
 
     # Check the count of equal sign
     equals_count = input.count('=')
