@@ -60,6 +60,6 @@ if __name__ == '__main__':
 
 # Bonus :
 # - natural form inputs: a * X^n, a * X, X^n, a
-# - formatting error handling : wrong degree, wrong format, double sign
-# - solid parser
+# - formatting error handling: wrong degree, wrong format, double sign
+# - solid parser: power can be parsed no matter the order they are provided
 # - webapp

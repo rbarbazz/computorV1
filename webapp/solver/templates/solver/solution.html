@@ -5,6 +5,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>Computor V1 - Solution</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<style>
+			h1 {
+				margin-bottom: 50px;
+			}
+			.output {
+				font-size: 20px;
+				margin: auto;
+				max-width: 500px;
+				text-align: left;
+			    width: 50%;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -13,7 +25,7 @@
 	        	<h1 class="mt-5">Computor V1</h1>
 				{% block content %}
 					{% for line in content %}
-			        	<p class="lead">{{ line }}</p>
+			        	<p class="output">{{ line }}</p>
 					{% endfor %}
 				{% endblock %}
 				<a class="btn btn-danger" href="/" role="button">Back</a>
