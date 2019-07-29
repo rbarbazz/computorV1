@@ -34,12 +34,12 @@ def solve_equ(input):
     # Check degree
     if equation.degree > 2:
         return (
-            solution +
+            re.sub(r'\.0 ', ' ', solution) +
             'The polynomial degree is stricly greater than 2' +
             ', sorry I can\'t solve it.'
         )
     elif equation.degree == 0:
-        return solution + 'Equation is invalid'
+        return re.sub(r'\.0 ', ' ', solution) + 'Equation is invalid'
 
     solution += equation.solve()
     return re.sub(r'\.0 ', ' ', solution)

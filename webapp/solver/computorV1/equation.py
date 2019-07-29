@@ -1,11 +1,15 @@
 import re
 
 
-def sqrt(number, number_iters=500):
+def sqrt(number, number_iters=1000):
     a = float(number)
     for i in range(number_iters):
         number = 0.5 * (number + a / number)
     return number
+
+
+def round_5_digit(number):
+    return round(number, 5)
 
 
 class Equation:
@@ -27,21 +31,31 @@ class Equation:
     # Get reduced form as a dict {exp: N}
     def get_term(self, equation_part, isRight=False):
         terms_len = 0
-        reg = re.compile('(?P<coef>[-+]?[0-9]*\.[0-9]+|[-+]?[0-9]+)(?P<pow>\*X(\^(?P<exp>\d+))?)?|(?P<xpow>[-+]?X\^(?P<xexp>\d+))')
+        reg = re.compile(
+            '(?P<coef>(?:^|[-+])\d+\.\d+|(?:^|[-+])\d+)'
+            '(?P<pow>\*X(?:\^(?P<exp>\d+))?)?|'
+            '(?P<xpow>(?P<xsign>^|[-+])X(?P<xwpow>\^(?P<xexp>\d+))?)'
+        )
         matches = re.finditer(reg, equation_part)
 
         for match in matches:
             # Check if the match is a * X^n or a number
-            # Format: a * X^n or a * X
+            # Format: a * X
             if match.group('pow') is not None:
                 coef = float(match.group('coef'))
                 exp = 1
+                # Format: a * X^n
                 if match.group('exp') is not None:
                     exp = int(match.group('exp'))
-            # Format: X^n
+            # Format: X
             elif match.group('xpow') is not None:
-                coef = 1
-                exp = int(match.group('xexp'))
+                coef = -1
+                if match.group('xsign') is not '-':
+                    coef = 1
+                exp = 1
+                # Format: X^n
+                if match.group('xwpow') is not None:
+                    exp = int(match.group('xexp'))
             # Format: a
             else:
                 coef = float(match.group('coef'))
@@ -61,6 +75,10 @@ class Equation:
 
     def get_reduced_form(self):
         reduced_form = ''
+        rounded_terms = {
+            term: round_5_digit(value) for term, value in self.terms.items()
+        }
+        self.terms = rounded_terms
 
         for term, value in self.terms.items():
             if value != 0:
@@ -85,14 +103,19 @@ class Equation:
         c = self.terms[0]
 
         if self.degree == 1:
-            return 'The solution is:\n{} '.format(-c / b)
+            return 'The solution is:\n{} '.format(
+                round_5_digit(-c / b)
+            )
         else:
-            self.delta = b ** 2 - (4 * a * c)
+            self.delta = (b * b) - (4 * a * c)
+            self.delta = round_5_digit(self.delta)
             solution_str = 'Discriminant: {} \n'.format(self.delta)
 
             if self.delta < 0:
                 first_part = -b / (2 * a)
+                first_part = round_5_digit(first_part)
                 second_part = sqrt(-self.delta) / (2 * a)
+                second_part = round_5_digit(second_part)
                 solution_str += (
                     'The discriminant is stricly negative, ' +
                     'there are two complex solution:\n' +
@@ -109,15 +132,17 @@ class Equation:
                     'The discriminant is null, ' +
                     'there is one solution:\n'
                 )
-                solution_str += '{} '.format(-b / (2 * a))
+                solution_str += '{} '.format(
+                    round_5_digit(-b / (2 * a))
+                )
             else:
                 solution_str += (
                     'The discriminant is stricly positive, ' +
                     'there are two solutions:\n'
                 )
                 solution_str += '{} \n{} '.format(
-                    (-b - sqrt(self.delta)) / (2 * a),
-                    (-b + sqrt(self.delta)) / (2 * a)
+                    round_5_digit((-b - sqrt(self.delta)) / (2 * a)),
+                    round_5_digit((-b + sqrt(self.delta)) / (2 * a))
                 )
 
         return solution_str

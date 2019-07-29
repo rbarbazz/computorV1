@@ -43,12 +43,12 @@ def solve_equ(input):
     # Check degree
     if equation.degree > 2:
         return (
-            solution +
+            re.sub(r'\.0 ', ' ', solution) +
             'The polynomial degree is stricly greater than 2' +
             ', sorry I can\'t solve it.'
         )
     elif equation.degree == 0:
-        return solution + 'Equation is invalid'
+        return re.sub(r'\.0 ', ' ', solution) + 'Equation is invalid'
 
     solution += equation.solve()
     return re.sub(r'\.0 ', ' ', solution)
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     print(solve_equ(input))
 
 # Bonus :
-# - natural form inputs: a * X^n, a * X, X^n, a
-# - formatting error handling: wrong degree, wrong format, double sign
+# - natural form inputs: a * X^n, a * X, X^n, a, X
+# - formatting error handling: wrong format, double sign
 # - solid parser: power can be parsed no matter the order they are provided
 # - webapp
